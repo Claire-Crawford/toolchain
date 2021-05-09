@@ -10,16 +10,18 @@
 
 # This script installs the Davsk Toolchain on Ubuntu 21.04
 
-OS_ID=$(cat /etc/os-release | grep '\nID=' | cut -d]=] -f2 )
+OS_ID=$(cat /etc/os-release | grep '^ID=' | cut -d'=' -f2 )
+echo $OS_ID
 
-CASE $OS_ID in
+case $OS_ID in
   ubuntu)
     echo "Installing Davsk Toolchain on Ubuntu."
     ;;
   *)
-    echo "OS Release ID not recognized!
-    exit(1)
-ESAC
+    echo "OS Release ID $OS_ID not recognized!"
+    exit 1
+    ;;
+esac
 
 # Updates
 sudo apt-get update
