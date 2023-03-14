@@ -9,6 +9,10 @@
 # Copyright (c) 2021 Davsk Ltd Co. All Rights Reserved
 
 # This script installs the Davsk Toolchain on Ubuntu 21.04
+# Claires-MBP :: /etc % sw_vers                                                                            
+# ProductName:		macOS
+# ProductVersion:		13.2.1
+# BuildVersion:		22D68
 
 OS_ID=$(cat /etc/os-release | grep '^ID=' | cut -d'=' -f2 )
 echo $OS_ID
@@ -19,16 +23,19 @@ case $OS_ID in
     ;;
   *)
     echo "OS Release ID $OS_ID not recognized!"
-    exit 1
+    Check for macOS
+    # exit 1
     ;;
 esac
 
 # Updates
-sudo apt-get update
-sudo apt-get -y upgrade
+# sudo apt-get update
+# sudo apt-get -y upgrade
+softwareupdate -l
+# output: No new software available.
 
 # linuxbrew
-sudo apt-get install build-essential procps curl file git
+# sudo apt-get install build-essential procps curl file git
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # shellcheck disable=SC2016
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/david/.profile
